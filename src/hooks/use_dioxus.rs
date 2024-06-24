@@ -1,4 +1,6 @@
-use dioxus_lib::prelude::{Writable, use_signal, ReadOnlySignal, Readable};
+use std::{cell::RefCell, rc::Rc};
+
+use dioxus_lib::prelude::{Writable, use_signal, ReadOnlySignal, Readable, use_hook};
 
 /// Alternative to [use_memo]
 /// Benefits:
@@ -27,8 +29,8 @@ pub fn use_computed_with_prev<T: 'static + Clone, D: PartialEq + 'static>(
         value: T,
         deps: D,
     }
-    let mut memo_signal = use_signal::<Option<Memoized<T, D>>>(|| None);
-    let mut memo = memo_signal.write();
+    let memo_signal = use_hook(|| Rc::new(RefCell::new(None::<Memoized<T, D>>)));
+    let mut memo = memo_signal.borrow_mut();
 
     let deps_have_changed = memo
         .as_ref()
