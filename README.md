@@ -2,7 +2,7 @@
 
 # `dioxus-use-computed` 🦀🧠
 
-Alternative to the built-in hook `use_memo` and `use_reactive` of [Dioxus](https://dioxuslabs.com/).
+Alternative to the built-in [Dioxus](https://dioxuslabs.com/) hooks `use_memo` and `use_reactive`.
 
 The main idea is to make resource-expensive computations in the most efficient way possible. Avoiding unnecessary rerenders and wrappers.
 
