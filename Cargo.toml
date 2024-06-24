@@ -1,11 +1,12 @@
 [package]
-name = "dioxus-library-template"
-version = "0.2.0"
+name = "dioxus-use-computed"
+version = "0.1.0"
 edition = "2021"
-description = "Library for Dioxus 🧬"
+license = "MIT"
+description = "Run resource-expensive computations in the most efficient way possible in Dioxus 🧬 apps 🦀"
 readme = "./README.md"
-homepage = "https://github.com/dioxus-community/dioxus-library-template"
-repository = "https://github.com/dioxus-community/dioxus-library-template"
+homepage = "https://github.com/dioxus-community/dioxus-use-computed"
+repository = "https://github.com/dioxus-community/dioxus-use-computed"
 keywords = ["dioxus"]
 categories = ["gui"]
 
