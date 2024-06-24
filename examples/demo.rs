@@ -66,7 +66,7 @@ fn CounterSignal(value: usize) -> Element {
 
 #[component]
 fn PrevCounterSignal(value: usize) -> Element {
-    let double = use_computed_signal_with_prev(value, |prev_value| prev_value.cloned().unwrap_or(value) * 2);
+    let double = use_computed_signal_with_prev(value, |prev| prev.cloned().unwrap_or(value) * 2);
 
     rsx!(
         p {

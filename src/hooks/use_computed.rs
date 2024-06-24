@@ -1,8 +1,8 @@
 use std::{cell::RefCell, rc::Rc};
 
-use dioxus_lib::prelude::{Writable, use_signal, ReadOnlySignal, Readable, use_hook};
+use dioxus_lib::prelude::{use_hook, use_signal, ReadOnlySignal, Readable, Writable};
 
-/// Alternative to [use_memo]
+/// Alternative to [use_memo](dioxus_lib::prelude::use_memo)
 /// Benefits:
 /// - No unnecessary rerenders
 /// Downsides:
@@ -14,8 +14,7 @@ pub fn use_computed<T: 'static + Clone, D: PartialEq + 'static>(
     use_computed_with_prev(deps, |_| init())
 }
 
-
-/// Alternative to [use_memo]
+/// Alternative to [use_memo](dioxus_lib::prelude::use_memo)
 /// Benefits:
 /// - No unnecessary rerenders
 /// - Prev value is `T` instead of `&mut T`
@@ -32,15 +31,10 @@ pub fn use_computed_with_prev<T: 'static + Clone, D: PartialEq + 'static>(
     let memo_signal = use_hook(|| Rc::new(RefCell::new(None::<Memoized<T, D>>)));
     let mut memo = memo_signal.borrow_mut();
 
-    let deps_have_changed = memo
-        .as_ref()
-        .map(|memo| &memo.deps)
-        != Some(&deps);
+    let deps_have_changed = memo.as_ref().map(|memo| &memo.deps) != Some(&deps);
 
     let new_value = if deps_have_changed {
-        let prev_value = memo
-            .take()
-            .map(|memo| memo.value);
+        let prev_value = memo.take().map(|memo| memo.value);
         Some(init(prev_value))
     } else {
         None
@@ -57,9 +51,7 @@ pub fn use_computed_with_prev<T: 'static + Clone, D: PartialEq + 'static>(
     memo.as_ref().unwrap().value.clone()
 }
 
-
-
-/// Alternative to [use_memo]
+/// Alternative to [use_memo](dioxus_lib::prelude::use_memo)
 /// Benefits:
 /// - No unnecessary rerenders
 /// Downsides:
@@ -71,8 +63,7 @@ pub fn use_computed_signal<T: 'static, D: PartialEq + Clone + 'static>(
     use_computed_signal_with_prev(deps, move |_| init())
 }
 
-
-/// Alternative to [use_memo]
+/// Alternative to [use_memo](dioxus_lib::prelude::use_memo)
 /// Benefits:
 /// - No unnecessary rerenders
 /// - Access the previous computed value
@@ -88,7 +79,7 @@ pub fn use_computed_signal_with_prev<T: 'static, D: PartialEq + Clone + 'static>
 
     let deps_have_changed = *deps_signal.peek() != deps;
 
-   if deps_have_changed {
+    if deps_have_changed {
         let mut memoized_deps = deps_signal.write();
         let mut memoized_value = value_signal.write();
 
@@ -97,7 +88,6 @@ pub fn use_computed_signal_with_prev<T: 'static, D: PartialEq + Clone + 'static>
         *memoized_value = new_value;
         *memoized_deps = deps;
     }
-
 
     value_signal.into()
 }

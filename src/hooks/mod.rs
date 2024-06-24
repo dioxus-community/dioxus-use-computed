@@ -1,3 +1,3 @@
-mod use_dioxus;
+mod use_computed;
 
-pub use use_dioxus::*;
+pub use use_computed::*;
