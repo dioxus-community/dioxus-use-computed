@@ -2,9 +2,9 @@
 
 # `use_computed` 🦀🧠
 
-Alternative to the built-in hook `use_memo` of [Dioxus](https://dioxuslabs.com/).
+Alternative to the built-in hook `use_memo` and `use_reactive` of [Dioxus](https://dioxuslabs.com/).
 
-The main idea is to make memoizations the most efficient way possible.
+The main idea is to make resource-expensive computations in the most efficient way possible. Avoiding unnecessary rerenders and wrappers.
 
 ```rs
 fn app() -> Element {
