@@ -1,6 +1,6 @@
 [package]
 name = "dioxus-use-computed"
-version = "0.1.0"
+version = "0.2.0-alpha.1"
 edition = "2021"
 license = "MIT"
 description = "Run resource-expensive computations in the most efficient way possible in Dioxus 🧬 apps 🦀"
@@ -11,7 +11,7 @@ keywords = ["dioxus"]
 categories = ["gui"]
 
 [dependencies]
-dioxus-lib = { version = "0.5", default-features = false, features = ["macro", "hooks", "signals"] }
+dioxus-lib = { version = "0.6.0-alpha.5", default-features = false, features = ["macro", "hooks", "signals"] }
 
 [dev-dependencies]
-dioxus = { version = "0.5", features = ["desktop"]}
+dioxus = { version = "0.6.0-alpha.5", features = ["desktop"] }
