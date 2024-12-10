@@ -1,6 +1,11 @@
 use std::{cell::RefCell, rc::Rc};
 
 use dioxus_lib::prelude::{use_hook, use_signal, ReadOnlySignal, Readable, Writable};
+mod warnings {
+    pub use warnings::Warning;
+}
+pub use warnings::Warning;
+
 
 /// Alternative to [use_memo](dioxus_lib::prelude::use_memo)
 /// Benefits:
@@ -80,13 +85,15 @@ pub fn use_computed_signal_with_prev<T: 'static, D: PartialEq + Clone + 'static>
     let deps_have_changed = *deps_signal.peek() != deps;
 
     if deps_have_changed {
-        let mut memoized_deps = deps_signal.write();
-        let mut memoized_value = value_signal.write();
+        dioxus_lib::prelude::warnings::signal_write_in_component_body::allow(|| {
+            let mut memoized_deps = deps_signal.write();
+            let mut memoized_value = value_signal.write();
 
-        let new_value = init(Some(&mut *memoized_value));
+            let new_value = init(Some(&mut *memoized_value));
 
-        *memoized_value = new_value;
-        *memoized_deps = deps;
+            *memoized_value = new_value;
+            *memoized_deps = deps;
+        });
     }
 
     value_signal.into()
